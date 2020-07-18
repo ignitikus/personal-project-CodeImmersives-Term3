@@ -1,0 +1,6 @@
+export const OPEN_MODAL = 'OPEN_MODAL'
+export const CLOSE_MODAL = 'CLOSE_MODAL'
+export const LOGIN_MODE = 'LOGIN_MODE'
+export const REGISTER_MODE = 'REGISTER_MODE'
+export const LOGIN = 'LOGIN'
+export const REGISTER = 'REGISTER'

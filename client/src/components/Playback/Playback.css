@@ -1,0 +1,46 @@
+.tabs-container{
+   display: flex;
+   justify-content: space-evenly;
+   margin: 0 10px 10px 10px;
+}
+
+.recording-tab, .saved-tab{
+   text-decoration: none;
+   border-radius: 15px;
+   padding: 10px;
+   user-select: none;
+}
+.recording-tab:hover, .saved-tab:hover{
+   cursor: pointer;
+   color: red;
+}
+
+.active {
+   color: #eee;
+   background: red;
+   transform: scale(1.2,1.2);
+   transition: All 1s ease;
+   text-shadow: 1px 1px 1px black;
+}
+.active:hover {
+   color: black;
+}
+
+.notes-title{
+   font-size: 1.5em;
+   text-align: center;
+}
+
+.buttons-container{
+   display: flex;
+   justify-content: center;
+}
+
+.instruction-message{
+   padding: 10px;
+   text-align: center;
+}
+
+.key-container, .difference-container{
+   text-align: center;
+}

@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+#title{
+   font-family: 'Great Vibes', cursive;
+   font-size: 7rem;
+   position: absolute;
+   top: 2rem;
+}
+
+@keyframes colorChange {
+   0%{
+      fill: black
+   }
+   14%{
+      fill: red;
+   }
+   28%{
+      fill: orange;
+   }
+   42%{
+      fill: yellow;
+   }
+   56%{
+      fill: green;
+   }
+   68%{
+      fill: blue;
+   }
+   82%{
+      fill: indigo;
+   }
+   100%{
+      fill: violet;
+   }
+}
+
+.clef-key{
+   position: absolute;
+   right: 1.5em;
+   top: 1.5em;
+   width: 3em;
+   cursor: pointer;
+}
+
+.clef-key:hover{
+   animation: colorChange 2s infinite;
+}

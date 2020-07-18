@@ -1,0 +1,104 @@
+.material-ui-modal{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.inner-DIV{
+   color: #eee;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.styled-Form-Container{
+   width: 70%;
+   height: 90%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.span-container{
+   margin: 20px;
+   padding: 0 20px 10px 20px;
+}
+
+.login-span, .register-span{
+   margin: 30px;
+   padding: 20px;
+}
+
+.login-span:hover, .register-span:hover{
+   cursor: pointer;
+}
+
+.active-mode {
+   color: #eee;
+   background: red;
+   border-radius: 15px;
+   transition: background 1s ease;
+   text-shadow: 1px 1px 1px black;
+}
+
+.styled-Inputs{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: relative;
+   height: 15em;
+   width: 100%;
+}
+
+.input-field {
+   position: relative;
+   width: 250px;
+   height: 44px;
+   line-height: 44px;
+}
+
+.login-button, .register-button{
+   position: absolute;
+   bottom: 0;
+   width: 250px;
+}
+
+label {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   color: grey;
+   transition: 0.2s all;
+   cursor: text;
+   text-align: center;
+}
+input {
+   width: 100%;
+   border: 0;
+   outline: 0;
+   padding: 0.5rem 0 0.5rem 0.5rem;
+   border-bottom: 2px solid #d3d3d3;
+   box-shadow: none;
+   color: #111;
+   border-radius: 5px;
+   box-sizing: border-box;
+}
+
+input::before{
+   padding-right: 1rem;
+}
+
+input:focus,
+input:valid {
+   border-color: red;
+}
+input:focus~label,
+input:valid~label {
+   font-size: 14px;
+   left: -105%;
+   text-align: right;
+   color: red;
+}
