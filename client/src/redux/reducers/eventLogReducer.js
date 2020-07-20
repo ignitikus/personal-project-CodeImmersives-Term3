@@ -1,18 +1,19 @@
-import { ADD_TO_EVENT_LOG, RESET_EVENT_LOG, TOGGLE_SIDE, TOGGLE_RECORDING } from "../constants/eventLogConstants";
+import { 
+   ADD_TO_EVENT_LOG, 
+   RESET_EVENT_LOG, 
+   TOGGLE_SIDE, 
+   TOGGLE_RECORDING,
+   TOGGLE_PLAYING,
+   TOGGLE_ACTIVE_TAB,
+    } from "../constants/eventLogConstants";
 
 const initialState ={
-   eventLog: [
-      // {key: "a#", time: 1594911654402, difference: 0},
-      // {key: "f#", time: 1594911654708, difference: 306},
-      // {key: "e", time: 1594911654988, difference: 586},
-      // {key: "b", time: 1594911655340, difference: 938},
-      // {key: "b", time: 1594911655662, difference: 1260},
-      // {key: "e", time: 1594911656368, difference: 1966},
-      // {key: "e", time: 1594911656586, difference: 2184},
-   ],
+   eventLog: [],
    pianoKeys: ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'],
    side: true,
    recording: false,
+   playing: false,
+   activeTabIsSaved: false,
 }
 
 export default function (state = initialState, action) {
@@ -36,6 +37,16 @@ export default function (state = initialState, action) {
          return {
             ...state,
             recording: action.payload
+         }
+      case TOGGLE_PLAYING: 
+         return {
+            ...state,
+            playing: action.payload
+         }
+      case TOGGLE_ACTIVE_TAB: 
+         return {
+            ...state,
+            activeTabIsSaved: action.payload
          }
       default:
          return state

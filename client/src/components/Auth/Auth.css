@@ -102,3 +102,26 @@ input:valid~label {
    text-align: right;
    color: red;
 }
+
+.cross-icon{
+   color: red;
+   display: flex;
+   align-items: center;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   right: 0;
+}
+.cross-icon:hover{
+   color: darkred;
+}
+
+.check-icon{
+   color: lightgreen;
+   display: flex;
+   align-items: center;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   right: 0;
+}

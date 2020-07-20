@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { pianoFuncStart } from './pianoNotes'
-import { addToLog, toggleSide, toggleRecording } from '../../../redux/actions/eventLogActions'
+import { addToLog, toggleSide, toggleRecording, toggleActiveTab } from '../../../redux/actions/eventLogActions'
 import './Piano.css'
 
 
@@ -29,6 +29,7 @@ export const Piano = (props) => {
    const handleRecording = () => {
       props.toggleRecording(!props.recording)
       props.toggleSide(true)
+      props.toggleActiveTab(false)
    }
    
    return (
@@ -83,4 +84,4 @@ const mapStateToProps = (state) => ({
    recording: state.pianoData.recording,
 })
 
-export default connect(mapStateToProps, { addToLog, toggleSide, toggleRecording })(Piano)
+export default connect(mapStateToProps, { addToLog, toggleSide, toggleRecording, toggleActiveTab })(Piano)

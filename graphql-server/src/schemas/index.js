@@ -1,0 +1,1 @@
+export { default as register } from './user.js'

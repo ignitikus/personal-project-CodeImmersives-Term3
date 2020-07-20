@@ -7,32 +7,38 @@
    top: 2rem;
 }
 
-@keyframes colorChange {
-   0%{
-      fill: black
+@keyframes vibrate-2 {
+   0% {
+     transform: translate(0);
    }
-   14%{
-      fill: red;
+   20% {
+     transform: translate(2px, -2px);
    }
-   28%{
-      fill: orange;
+   40% {
+     transform: translate(2px, 2px);
    }
-   42%{
-      fill: yellow;
+   60% {
+     transform: translate(-2px, 2px);
    }
-   56%{
-      fill: green;
+   80% {
+     transform: translate(-2px, -2px);
    }
-   68%{
-      fill: blue;
+   100% {
+     transform: translate(0);
    }
-   82%{
-      fill: indigo;
+ }
+
+ @keyframes pulsate-fwd {
+   0% {
+     transform: scale(1);
    }
-   100%{
-      fill: violet;
+   50% {
+     transform: scale(1.1);
    }
-}
+   100% {
+     transform: scale(1);
+   }
+ }
 
 .clef-key{
    position: absolute;
@@ -43,5 +49,18 @@
 }
 
 .clef-key:hover{
-   animation: colorChange 2s infinite;
+   animation: pulsate-fwd 0.5s ease-in-out infinite both;
+}
+
+.exit-sign{
+   position: absolute;
+   right: 1.5em;
+   top: 1.5em;
+   width: 3em;
+   cursor: pointer;
+   fill: black;
+}
+
+.exit-sign:hover{
+   animation: vibrate-2 0.3s linear infinite both;
 }

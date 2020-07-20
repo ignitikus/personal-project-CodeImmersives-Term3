@@ -1,3 +1,36 @@
+@keyframes shadow-drop-2-center {
+   0% {
+     transform: translateZ(0);
+     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+   }
+   100% {
+     transform: translateZ(50px);
+     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+   }
+ }
+ 
+.noteListContainer{
+   position: absolute;
+   right: 0;
+   width: 0;
+   min-Height: 20%;
+   max-Height: 50%;
+   overflow-Y: auto;
+   overflow-x: hidden;
+   border-Right: 0;
+   border-Radius: 15px 0 0 15px;
+   padding: 20px 0 20px 0;
+   transition: all 1s ease;
+   animation: shadow-drop-2-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both alternate infinite;
+}
+.noteListContainer:hover{
+   animation: shadow-drop-2-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both alternate;
+}
+
+.show-container{
+   width: 20%
+}
+
 .tabs-container{
    display: flex;
    justify-content: space-evenly;
@@ -39,8 +72,33 @@
 .instruction-message{
    padding: 10px;
    text-align: center;
+   white-space: nowrap;
 }
 
 .key-container, .difference-container{
    text-align: center;
+}
+
+.saved-compositions-container{
+   margin: 10px;
+   white-space: nowrap;
+}
+.saved-compositions-container>div{
+   margin: 10px;
+}
+
+.saved-composition{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.iconButton{
+   color: red !important;
+   transition: All 500ms ease !important;
+}
+
+.disabledButton{
+   color: grey !important;
+   transition: All 500ms ease !important;
 }

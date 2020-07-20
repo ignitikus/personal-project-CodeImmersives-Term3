@@ -57,10 +57,14 @@ export const pianoFuncStart = (key)=>{
    }
 }
 
-export const playBack = (arr)=>{
-   for(const note of arr){
+export const playBack = (arr, togglePlaying)=>{
+   for(const [index, note] of arr.entries()){
+      togglePlaying(true)
       setTimeout(() => {
          pianoFuncStart(note.key)
+         if(index === arr.length-1){
+            togglePlaying(false)
+         }
       }, note.difference);
    }
 }

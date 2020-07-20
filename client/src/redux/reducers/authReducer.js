@@ -1,8 +1,18 @@
-import { OPEN_MODAL, CLOSE_MODAL, LOGIN_MODE, REGISTER_MODE, LOGIN, REGISTER } from '../constants/authConstants'
+import { 
+   LOGIN, 
+   REGISTER, 
+   OPEN_MODAL, 
+   LOGIN_MODE, 
+   CLOSE_MODAL, 
+   LOGOUT_USER,
+   REGISTER_MODE, 
+   USER_INFO_NO_AUTH
+} from '../constants/authConstants'
 
 const initialState ={ 
    user: null,
-   modalOpen: true,
+   isAuth: false,
+   modalOpen: false,
    modalModeLogin: true,
    isLoginMode: true
 }
@@ -33,11 +43,31 @@ export default function (state = initialState, action){
          return {
             ...state,
             user: action.payload,
+            modalOpen: false,
+            isAuth: true,
          }
       case REGISTER:
          return {
             ...state,
             user: action.payload,
+            modalOpen: false,
+            isAuth: true
+         }
+      case USER_INFO_NO_AUTH:
+         return {
+            ...state,
+            user: action.payload,
+            modalOpen: false,
+            isAuth: false,
+         }
+      case LOGOUT_USER:
+         return {
+            ...state,
+            user: action.payload,
+            isAuth: false,
+            modalOpen: false,
+            modalModeLogin: true,
+            isLoginMode: true
          }
       default:
          return state

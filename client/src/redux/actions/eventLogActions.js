@@ -1,4 +1,11 @@
-import { ADD_TO_EVENT_LOG, RESET_EVENT_LOG, TOGGLE_SIDE, TOGGLE_RECORDING } from '../constants/eventLogConstants'
+import { 
+   ADD_TO_EVENT_LOG, 
+   RESET_EVENT_LOG, 
+   TOGGLE_SIDE, 
+   TOGGLE_RECORDING,
+   TOGGLE_PLAYING,
+   TOGGLE_ACTIVE_TAB,
+    } from '../constants/eventLogConstants'
 
 export const addToLog = (event) => (dispatch)=>{
    dispatch({
@@ -23,6 +30,20 @@ export const toggleSide = (bool) =>(dispatch)=>{
 export const toggleRecording = (bool) =>(dispatch)=>{
    dispatch({
       type:TOGGLE_RECORDING,
+      payload: bool
+   })
+}
+
+export const togglePlaying = (bool) =>(dispatch) =>{
+   dispatch({
+      type:TOGGLE_PLAYING,
+      payload: bool
+   })
+}
+
+export const toggleActiveTab = (bool) =>(dispatch) =>{
+   dispatch({
+      type: TOGGLE_ACTIVE_TAB,
       payload: bool
    })
 }

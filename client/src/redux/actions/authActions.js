@@ -1,4 +1,13 @@
-import { OPEN_MODAL, CLOSE_MODAL, LOGIN_MODE, REGISTER_MODE, LOGIN, REGISTER } from '../constants/authConstants'
+import { 
+   LOGIN, 
+   REGISTER, 
+   OPEN_MODAL, 
+   LOGIN_MODE, 
+   CLOSE_MODAL, 
+   LOGOUT_USER,
+   REGISTER_MODE, 
+   USER_INFO_NO_AUTH,
+} from '../constants/authConstants'
 
 export const openModal = ()=>(dispatch)=>{
    dispatch({
@@ -23,8 +32,6 @@ export const registerMode = (user)=>(dispatch)=>{
 }
 
 export const login = (user)=>(dispatch)=>{
-   console.log(user)
-   //make server call
    dispatch({
       type: LOGIN,
       payload: user
@@ -32,10 +39,25 @@ export const login = (user)=>(dispatch)=>{
 }
 
 export const register = (user)=>(dispatch)=>{
-   console.log(user)
-   //make server call
    dispatch({
       type: REGISTER,
       payload: user
+   })
+}
+
+export const userInfo = (user)=>(dispatch)=>{
+   dispatch({
+      type: USER_INFO_NO_AUTH,
+      payload: {
+         id: user.getUserInfo.id,
+         email: user.getUserInfo.email,
+         username: user.getUserInfo.username,
+      }
+   })
+}
+
+export const logoutUser = ()=>(dispatch)=>{
+   dispatch({
+      type: LOGOUT_USER
    })
 }

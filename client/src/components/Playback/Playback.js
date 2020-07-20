@@ -4,114 +4,118 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import IconButton from '@material-ui/core/IconButton';
 import CachedIcon from '@material-ui/icons/Cached';
+import { useLazyQuery, useMutation } from '@apollo/client';
 
+import { errorToast } from '../Toastify/Toast'
+import { GET_USER_COMPOSITIONS } from '../../apollo/queries'
+import { SAVE_MUSIC_PIECE } from '../../apollo/mutations'
 import { playBack } from '../Instruments/Piano/pianoNotes'
-import { resetLog } from '../../redux/actions/eventLogActions'
+import { resetLog, togglePlaying, toggleActiveTab } from '../../redux/actions/eventLogActions'
 
 import './Playback.css'
 
-const iconButton = {
-   color: 'red',
-   transition: 'All 500ms ease'
-}
-const disabledButton = {
-   color: 'grey',
-   transition: 'All 500ms ease'
-}
-
 export const Playback = (props) => {
 
-   const [activeTab, setActiveTab] = useState('recording')
+   const [userComps, setUserComps] = useState([])
 
-   const noteListContainer = {
-      position: 'absolute',
-      right: 0,
-      width: `${props.side ? '20%' : '0'}`,
-      minHeight: '20%',
-      maxHeight: '50%',
-      overflowY: 'auto',
-      border: '1px solid black',
-      borderRight: 0,
-      borderRadius: '15px 0 0 15px',
-      boxShadow: '5px 10px #888888',
-      padding: '20px 0 20px 0',
+   const [ getCompositions, { loading } ] = useLazyQuery(GET_USER_COMPOSITIONS, {
+      onCompleted: ({userCompositions}) => {
+         setUserComps([...userCompositions])
+      },
+      onError: (err)=>{
+         errorToast(err.message)
+      }
+   })
+
+   const [ saveMutation ] = useMutation(SAVE_MUSIC_PIECE)
+
+   const saveComposition =async () =>{
+      if(props.isAuth){
+         const noTimeEventLog = props.eventLog.map(note=> {
+            return {
+               key: note.key,
+               difference: note.difference         
+            }
+         })
+
+         await saveMutation({
+            variables:{
+               author: props.user.id,
+               composition: noTimeEventLog
+            }
+         })
+      }else{
+         console.log('Not authorized')
+      }
    }
 
-   const playbackNotes = () =>{
-      playBack(props.eventLog)
+   const handleTabClick = async(mode) => {
+      props.toggleActiveTab(mode)
+      if(mode){
+         if(loading) return setUserComps(['Loading ...'])
+         await getCompositions({
+            variables:{
+               id: props.user.id
+            }
+         })
+      }
    }
 
-   const saveComposition = () =>{
-      console.log(props.eventLog)
+   const handleRecordingPlayback = ()=>{
+      if(!props.isPlaying){
+         playBack(props.eventLog, props.togglePlaying)
+      }
    }
 
-   const resetEventLog = () => {
-      props.resetLog()
+   const handlePiecePlayback = (comp)=>{
+      if(!props.isPlaying){
+         playBack(comp, props.togglePlaying)
+      }
    }
 
-   const handleTabClick = (mode) => {
-      console.log(mode)
-      setActiveTab(mode)
+   const playbackAndResetCheck = ()=>{
+      if(props.recording) return true
+      if(props.eventLog.length<1) return true
+      return false
    }
-   
+
+   const saveCheck =()=>{
+      if(props.recording) return true
+      if(props.eventLog.length<1) return true
+      return false
+   }
+
+
    return (
-      <div style={noteListContainer}>
+      <div className={`noteListContainer ${props.side ? 'show-container': 'hide-container'}`}>
          <div className='tabs-container'>
-            <div className={`recording-tab ${activeTab==='recording'? 'active' :''}`} onClick={()=>handleTabClick('recording')}>Recording</div>
-            <div className={`saved-tab ${activeTab==='saved'? 'active' :''}`} onClick={()=>handleTabClick('saved')}>Saved</div>
+            <div className={`recording-tab ${!props.activeTabIsSaved? 'active' :''}`} onClick={()=>handleTabClick(false)}>Recording</div>
+            {props.user &&
+               <div className={`saved-tab ${props.activeTabIsSaved? 'active' :''}`} onClick={()=>handleTabClick(true)}>Saved</div>
+            }
          </div>
-         {activeTab==='recording' && 
+         {!props.activeTabIsSaved ? 
             <>
-                  <div className='buttons-container'>
-                     <IconButton 
-                        onClick={playbackNotes}
-                        disabled={props.recording 
-                           ? true
-                           : props.eventLog.length>1
-                              ? false
-                              : true
-                        } 
-                        style={props.eventLog.length>1 
-                        ? props.recording 
-                           ? disabledButton 
-                           : iconButton 
-                        : disabledButton}
-                     >
-                        <PlayCircleOutlineIcon />
-                     </IconButton>
-                     <IconButton 
-                        onClick={saveComposition}
-                        disabled={props.recording 
-                           ? true
-                           : props.eventLog.length>1
-                              ? false
-                              : true
-                        } 
-                        style={props.eventLog.length>1 
-                        ? props.recording 
-                           ? disabledButton 
-                           : iconButton 
-                        : disabledButton}
-                     >
-                        <SaveAltIcon />
-                     </IconButton>
-                     <IconButton 
-                        onClick={resetEventLog}
-                        disabled={props.recording 
-                           ? true
-                           : props.eventLog.length>1
-                              ? false
-                              : true
-                        } 
-                        style={props.eventLog.length>1 
-                        ? props.recording 
-                           ? disabledButton 
-                           : iconButton 
-                        : disabledButton}
-                     >
-                        <CachedIcon />
-                     </IconButton>
-                  </div>
+               <div className='buttons-container'>
+                  <IconButton 
+                     onClick={handleRecordingPlayback}
+                     disabled={playbackAndResetCheck()} 
+                     className={playbackAndResetCheck()?'disabledButton':'iconButton'}>
+                     <PlayCircleOutlineIcon />
+                  </IconButton>
+                  <IconButton 
+                     onClick={saveComposition}
+                     disabled={saveCheck()} 
+                     className={saveCheck()?'disabledButton':'iconButton'}>
+                     <SaveAltIcon />
+                  </IconButton>
+                  <IconButton 
+                     onClick={props.resetLog}
+                     disabled={playbackAndResetCheck()} 
+                     className={playbackAndResetCheck()?'disabledButton':'iconButton'}>
+                     <CachedIcon />
+                  </IconButton>
+               </div>
                <table style={{width:'100%'}}>
                   <thead>
                      <tr>
@@ -122,7 +126,7 @@ export const Playback = (props) => {
                   <tbody>
                      {props.eventLog.length<1 && 
                         <tr>
-                           <td colSpan="2" className='instruction-message'>Press on 'Record' to start recording your creation</td> 
+                           <td colSpan="2" className='instruction-message'>Press on 'Record' <br></br> to start recording your creation</td> 
                         </tr>
                      }
                      {props.eventLog.map(note=>{
@@ -136,16 +140,35 @@ export const Playback = (props) => {
                   </tbody>
                </table>
             </>   
+            
+            :<div className='saved-compositions-container'>
+               {userComps.map((piece,i)=>{
+                  return(
+                     <div key={piece.id} className='saved-composition'>
+                        <div>
+                           {`Composition #${i+1}`}
+                        </div>
+                        <div onClick={()=>handlePiecePlayback(piece.composition)}>
+                           <PlayCircleOutlineIcon />
+                        </div>
+                     </div>
+                  )
+               })}
+            </div>
          }
       </div>
    )
 }
 
 const mapStateToProps = (state) => ({
-   eventLog: state.pianoData.eventLog,
    side: state.pianoData.side,
+   eventLog: state.pianoData.eventLog,
+   isPlaying: state.pianoData.playing,
+   activeTabIsSaved: state.pianoData.activeTabIsSaved,
    recording: state.pianoData.recording,
+   user: state.userData.user,
+   isAuth: state.userData.isAuth,
 })
 
 
-export default connect(mapStateToProps, {resetLog})(Playback)
+export default connect(mapStateToProps, {resetLog, togglePlaying, toggleActiveTab})(Playback)
