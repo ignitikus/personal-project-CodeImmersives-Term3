@@ -76,7 +76,7 @@ export default {
          } catch (err) {
             throw new ApolloError(err.message)
          } 
-      },
+      }, 
    },
    Mutation: {
       register: async(root, args, {res}, info)=> {
@@ -127,6 +127,20 @@ export default {
                throw new ApolloError(err.message)
             }
          }
+      },
+      deleteComposition: async(root, {id}, context, info) => {
+         try {
+            const result = await Composition.findByIdAndDelete(id)
+            if(!result) throw new Error('Something went wrong. Please refresh the page')
+            return result
+         } catch (err) {
+            if(err.code){
+               mongoDBError(err)
+            }else{
+               throw new ApolloError(err.message)
+            }
+         }
       }
+      
    }
 }

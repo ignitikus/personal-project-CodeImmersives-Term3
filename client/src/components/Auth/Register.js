@@ -147,7 +147,7 @@ export const Register = (props) => {
             }
          </div>
          <button 
-            className='register-button' 
+            className={`register-button ${!(!userNameDuplicate && !emailDuplicate && passwordValidation && emailRegex && username.length>3)? 'disabled-button': ''}`}
             onClick={()=>handleSubmit()}
             disabled={!(!userNameDuplicate && !emailDuplicate && passwordValidation && emailRegex && username.length>3)}
          >Register</button>

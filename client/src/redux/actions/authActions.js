@@ -9,6 +9,8 @@ import {
    USER_INFO_NO_AUTH,
 } from '../constants/authConstants'
 
+import Cookies from 'js-cookie'
+
 export const openModal = ()=>(dispatch)=>{
    dispatch({
       type: OPEN_MODAL
@@ -57,6 +59,9 @@ export const userInfo = (user)=>(dispatch)=>{
 }
 
 export const logoutUser = ()=>(dispatch)=>{
+   Cookies.remove('access-token')
+   Cookies.remove('refresh-token')
+
    dispatch({
       type: LOGOUT_USER
    })

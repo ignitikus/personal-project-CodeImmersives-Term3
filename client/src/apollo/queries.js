@@ -40,9 +40,10 @@ export const GET_ALL_COMPOSITIONS = gql`
 `
 
 export const GET_USER_COMPOSITIONS = gql`
-  query($id: ID!){
+  query($id: ID){
     userCompositions(id: $id){
       id
+      name
       author
       updatedAt
       composition{

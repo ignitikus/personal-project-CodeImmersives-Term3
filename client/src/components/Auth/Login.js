@@ -48,7 +48,7 @@ export const Login = (props) => {
             <input type="password" id="login-password" value={password} onChange={(e)=>handleChange(e)}/>
             <label htmlFor="login-password">Password</label>
          </div>
-         <button className='login-button' onClick={() => loginUser(
+         <button className={`login-button ${email.length < 1 || password.length < 1? 'disabled-button':''}`} onClick={() => loginUser(
             { 
                variables: {
                   email,

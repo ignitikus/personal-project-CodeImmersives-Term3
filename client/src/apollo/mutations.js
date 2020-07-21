@@ -12,8 +12,16 @@ export const REGISTER = gql`
 `
 
 export const SAVE_MUSIC_PIECE = gql`
-   mutation($author: ID!, $composition:[CompositionInput!]){
-      saveComposition(author:$author, composition: $composition){
+   mutation($author: ID!, $composition:[CompositionInput!], $name: String!){
+      saveComposition(author:$author, composition: $composition, name: $name){
+         author
+      }
+   }
+`
+export const DELETE_COMPOSITION_BY_ID = gql`
+   mutation($id: ID!){
+      deleteComposition(id: $id){
+         id
          author
       }
    }

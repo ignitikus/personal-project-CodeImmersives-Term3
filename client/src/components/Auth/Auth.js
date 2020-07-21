@@ -11,14 +11,7 @@ import { closeModal, loginMode, registerMode } from '../../redux/actions/authAct
 import './Auth.css'
 
 const pianoDIV ={
-   width: '50%',
-   height: '70%',
-   padding: '20px',
-   display: 'flex',
-   borderRadius: '15px',
-   outline: 'none',
    background: `url(${grand_piano}) no-repeat center`,
-   backgroundSize: 'contain',
 }
 
 
@@ -30,7 +23,7 @@ export const Auth = (props) => {
         onClose={props.closeModal}
         className='material-ui-modal'
       >
-         <div style={pianoDIV}>
+         <div style={pianoDIV} className='piano-svg'>
             <div className='inner-DIV'>
                <div className='styled-Form-Container'>
                   <div className='span-container'>

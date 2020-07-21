@@ -1,3 +1,25 @@
+@keyframes slide-in-left {
+   0% {
+     transform: translateX(-1000px);
+     opacity: 0;
+   }
+   100% {
+     transform: translateX(0);
+     opacity: 1;
+   }
+}
+
+.piano-svg{
+   width: 50%;
+   height: 70%;
+   padding: 20px;
+   display: flex;
+   border-Radius: 15px;
+   outline: none;
+   background-Size: contain;
+   animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
 .material-ui-modal{
    display: flex;
    justify-content: center;
@@ -58,12 +80,60 @@
    height: 44px;
    line-height: 44px;
 }
+@keyframes pulsate-fwd {
+   0% {
+     transform: scale(1);
+   }
+   50% {
+     transform: scale(1.1);
+   }
+   100% {
+     transform: scale(1);
+   }
+ }
+
+ @keyframes wobble-hor-bottom {
+   0%,
+   100% {
+     transform: translateX(0%);
+     transform-origin: 50% 50%;
+   }
+   15% {
+     transform: translateX(-30px) rotate(-6deg);
+   }
+   30% {
+     transform: translateX(15px) rotate(6deg);
+   }
+   45% {
+     transform: translateX(-15px) rotate(-3.6deg);
+   }
+   60% {
+     transform: translateX(9px) rotate(2.4deg);
+   }
+   75% {
+     transform: translateX(-6px) rotate(-1.2deg);
+   }
+ }
 
 .login-button, .register-button{
    position: absolute;
    bottom: 0;
-   width: 250px;
+   text-align: center;
+   padding: 20px;
+   border-radius: 15px;
 }
+
+.login-button:hover, .register-button:hover{
+   cursor: pointer;
+   background: red;
+   color: #eee;
+   animation: pulsate-fwd 0.5s ease-in-out infinite both;
+}
+
+.disabled-button:hover{
+   cursor: pointer;
+   background: rgba(239, 239, 239, 0.3);
+   animation: wobble-hor-bottom 2s both;}
 
 label {
    position: absolute;

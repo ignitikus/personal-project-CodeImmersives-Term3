@@ -1,3 +1,83 @@
+.naming-container{
+   background: #eeeeee;
+   width: 400px;
+   border-radius: 15px;
+   outline: none;
+}
+
+.modal-title{
+   text-align: center;
+   font-size: 2em;
+   margin: 10px;
+   font-weight: 900;
+   font-family: 'Great Vibes', cursive;
+   letter-spacing: 2px;
+}
+
+.modal-input{
+   font-size: 2em;
+   font-weight: 900;
+   text-align: center;
+}
+
+.verification-container{
+   background: red;
+   width: 450px;
+   border-radius: 15px;
+   outline: none;
+}
+
+.verification-title{
+   color: #eee;
+   text-align: center;
+   font-size: 2em;
+   margin: 20px;
+   font-weight: 900;
+   letter-spacing: 2px;
+}
+
+.verification-input{
+   font-size: 2em;
+   font-weight: 900;
+   text-align: center;
+}
+
+.verification-button{
+   border-radius: 15px;
+   margin: 10px 20px;
+   padding: 10px 20px;
+   transition: all 0.5s ease;
+   color: #eee;
+}
+
+.verification-button:hover{
+   background-color: #eee;
+   color: red;
+   text-shadow: 1px black;
+   cursor: pointer;
+}
+
+.modal-buttons-container{
+   display: flex;
+   width: 100%;
+   justify-content: center;
+   align-items: center;
+}
+
+.modal-button{
+   border-radius: 15px;
+   margin: 10px 20px;
+   padding: 10px 20px;
+   transition: all 0.5s ease;
+}
+
+.modal-button:hover{
+   background-color: red;
+   color: #eee;
+   text-shadow: 1px 1px 1px black;
+   cursor: pointer;
+}
+
 @keyframes shadow-drop-2-center {
    0% {
      transform: translateZ(0);
@@ -98,7 +178,21 @@
    transition: All 500ms ease !important;
 }
 
-.disabledButton{
+.disabledButton, .disabledButton:hover{
    color: grey !important;
    transition: All 500ms ease !important;
+   cursor: not-allowed !important;
+}
+
+
+.saved-icon-buttons{
+   display: flex;
+}
+
+.delete-icon{
+   margin-left: 5px;
+}
+
+.play-icon:hover, .delete-icon:hover{
+   cursor: pointer;
 }

@@ -2,8 +2,9 @@ import mongoose from 'mongoose'
 
 
 const CompositionSchema = new mongoose.Schema({
-   composition: [],
+   name: String,
    author: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+   composition: [],
 }, {
    timestamps: true
 })

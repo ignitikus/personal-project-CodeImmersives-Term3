@@ -63,7 +63,7 @@ export default function (state = initialState, action){
       case LOGOUT_USER:
          return {
             ...state,
-            user: action.payload,
+            user: null,
             isAuth: false,
             modalOpen: false,
             modalModeLogin: true,
