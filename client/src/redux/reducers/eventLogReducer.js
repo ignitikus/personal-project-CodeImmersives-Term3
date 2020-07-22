@@ -5,15 +5,18 @@ import {
    TOGGLE_RECORDING,
    TOGGLE_PLAYING,
    TOGGLE_ACTIVE_TAB,
+   TOGGLE_SAVE_MODAL,
     } from "../constants/eventLogConstants";
 
 const initialState ={
    eventLog: [],
    pianoKeys: ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'],
-   side: true,
+   keyboardKeys: ['s','e','d','r','f','h','y','j','u','k','i','l',],
+   side: false,
    recording: false,
    playing: false,
    activeTabIsSaved: false,
+   isSaveModalOpen: false
 }
 
 export default function (state = initialState, action) {
@@ -47,6 +50,11 @@ export default function (state = initialState, action) {
          return {
             ...state,
             activeTabIsSaved: action.payload
+         }
+      case TOGGLE_SAVE_MODAL: 
+         return {
+            ...state,
+            isSaveModalOpen: action.payload
          }
       default:
          return state

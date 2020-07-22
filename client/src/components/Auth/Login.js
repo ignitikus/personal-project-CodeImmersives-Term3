@@ -68,6 +68,7 @@ export const Login = (props) => {
                value={email}
                onChange={handleChange} 
                onKeyDown={handleKeyDown}
+               autoFocus
             />
             <label 
                htmlFor="login-email" 

@@ -117,6 +117,7 @@ export const Register = (props) => {
                   value={username} 
                   onChange={handleChange}
                   onKeyDown={handleKeyDown}
+                  autoFocus
                />
                <label 
                   htmlFor="register-username" 

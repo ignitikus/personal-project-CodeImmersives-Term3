@@ -5,6 +5,7 @@ import {
    TOGGLE_RECORDING,
    TOGGLE_PLAYING,
    TOGGLE_ACTIVE_TAB,
+   TOGGLE_SAVE_MODAL,
     } from '../constants/eventLogConstants'
 
 export const addToLog = (event) => (dispatch)=>{
@@ -44,6 +45,13 @@ export const togglePlaying = (bool) =>(dispatch) =>{
 export const toggleActiveTab = (bool) =>(dispatch) =>{
    dispatch({
       type: TOGGLE_ACTIVE_TAB,
+      payload: bool
+   })
+}
+
+export const toggleSaveModal = (bool) =>(dispatch)=>{
+   dispatch({
+      type: TOGGLE_SAVE_MODAL,
       payload: bool
    })
 }

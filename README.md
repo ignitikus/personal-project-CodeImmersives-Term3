@@ -31,9 +31,11 @@ Instructions for local installation:
       * `cd /client && npm install` 
       * `cd /graphql-server && npm install` 
    3. In `/graphql-server` folder create `.env` file - it will hold all variables you want to hide from github (secrets, ports, paths)
-   4. in `.env` create 4 variables: 
+   4. In `.env` create 4 variables: 
       ```
       PORT = "PORT_YOU_WANT_YOUR_BACKEND_TO_RUN_ON"
       MONGODB_URI = "PATH_TO_YOUR_MONGO_DB"
       JWT_USER_SECRET_KEY = "secret1"
       JWT_USER_REFRESH_SECRET_KEY = "SECRET2"
+   5. Navigate to into client folder on terminal and type `npm start`
+   6. In second terminal navigate into graphql-server folder and type  `npm start`

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { pianoFuncStart } from './pianoNotes'
@@ -8,6 +8,59 @@ import './Piano.css'
 
 export const Piano = (props) => {
    const [showKeys, setShowKeys] = useState(false)
+   const [showKeyboardKeys, setShowKeyboardKeys] = useState(false)
+   
+   useEffect(() => {
+      document.addEventListener('keydown', handleDocumentKeyDown, false)
+      return () => {
+         document.removeEventListener('keydown', handleDocumentKeyDown, false)
+      }
+   })
+
+   const handleDocumentKeyDown=(e)=>{
+      if(!(props.isSaveModalOpen || props.isLoginModalOpen)){
+         switch (e.keyCode) {
+            case 83:
+               handleOnMouseDown('c')
+               break;
+            case 68:
+               handleOnMouseDown('d')
+               break;
+            case 70:
+               handleOnMouseDown('e')
+               break;
+            case 72:
+               handleOnMouseDown('f')
+               break;
+            case 74:
+               handleOnMouseDown('g')
+               break;
+            case 75:
+               handleOnMouseDown('a')
+               break;
+            case 76:
+               handleOnMouseDown('b')
+               break;
+            case 69:
+               handleOnMouseDown('c#')
+               break;
+            case 82:
+               handleOnMouseDown('d#')
+               break;
+            case 89:
+               handleOnMouseDown('f#')
+               break;
+            case 85:
+               handleOnMouseDown('g#')
+               break;
+            case 73:
+               handleOnMouseDown('a#')
+               break;
+            default:
+               break;
+         }
+      }
+   }
 
    const handleOnMouseDown = (key) => {
       if(props.recording){
@@ -15,10 +68,10 @@ export const Piano = (props) => {
                props.toggleRecording(false)
             }else{
                props.addToLog({
-                     key,
-                     time: Date.now(),
-                     difference: props.eventLog.length > 0 ? (props.eventLog[0].time - Date.now())*-1 : 0
-                  })
+                  key,
+                  time: Date.now(),
+                  difference: props.eventLog.length > 0 ? (props.eventLog[0].time - Date.now())*-1 : 0
+               })
             }
       }
       pianoFuncStart(key)
@@ -44,6 +97,13 @@ export const Piano = (props) => {
                : <div>Show Keys</div>
             }</button>
             <button 
+               onClick={()=>setShowKeyboardKeys(!showKeyboardKeys)} 
+               id='show-hide-button'
+            >{showKeyboardKeys
+               ? <div>Hide Hotkeys</div>
+               : <div>Show Hotkeys</div>
+            }</button>
+            <button 
                onClick={handleSide} 
                id='show-hide-button'
             >{props.side
@@ -59,7 +119,7 @@ export const Piano = (props) => {
             }</button>
          </div>
          <ul className="set">
-            {props.pianoKeys.map(key=>{
+            {props.pianoKeys.map((key, i)=>{
                return(
                   <li 
                      key={key} 
@@ -67,7 +127,10 @@ export const Piano = (props) => {
                      id={key} 
                      onMouseDown={()=>handleOnMouseDown(key)}
                   >
-                     <span className='piano-keys'>{showKeys && key}</span>
+                     <div className='letter-keys'>
+                        <span className='piano-keys'>{showKeys && key}</span>
+                        <span className='keyboard-keys'>{showKeyboardKeys && `(${props.keyboardKeys[i]})`}</span>
+                     </div>
                   </li>
                )
             })}
@@ -82,6 +145,9 @@ const mapStateToProps = (state) => ({
    pianoKeys : state.pianoData.pianoKeys,
    side: state.pianoData.side,
    recording: state.pianoData.recording,
+   keyboardKeys: state.pianoData.keyboardKeys,
+   isSaveModalOpen: state.pianoData.isSaveModalOpen,
+   isLoginModalOpen: state.userData.modalOpen,
 })
 
 export default connect(mapStateToProps, { addToLog, toggleSide, toggleRecording, toggleActiveTab })(Piano)

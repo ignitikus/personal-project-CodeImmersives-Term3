@@ -12,14 +12,13 @@ import { errorToast, infoToast, successToast } from '../Toastify/Toast'
 import { GET_USER_COMPOSITIONS, LOGIN } from '../../apollo/queries'
 import { SAVE_MUSIC_PIECE, DELETE_COMPOSITION_BY_ID } from '../../apollo/mutations'
 import { playBack } from '../Instruments/Piano/pianoNotes'
-import { resetLog, togglePlaying, toggleActiveTab } from '../../redux/actions/eventLogActions'
+import { resetLog, togglePlaying, toggleActiveTab, toggleSaveModal } from '../../redux/actions/eventLogActions'
 import { login } from '../../redux/actions/authActions'
 
 import './Playback.css'
 
 export const Playback = (props) => {
 
-   const [isOpen, setIsOpen] = useState(false)
    const [isPassOpen, setIsPassOpen] = useState(false)
    const [userComps, setUserComps] = useState([])
    const [passCheck, setPassCheck] = useState('')
@@ -61,7 +60,7 @@ export const Playback = (props) => {
 
 
    const openModal = ()=>{
-      setIsOpen(true)
+      props.toggleSaveModal(true)
       setCompositionName(`Composition #${userComps.length+1}`)
    }
 
@@ -71,7 +70,7 @@ export const Playback = (props) => {
    const handleTabClick = async(mode) => props.toggleActiveTab(mode)
 
    const closeModal = ()=>{
-      setIsOpen(false)
+      props.toggleSaveModal(false)
       setCompositionName(`Composition #${userComps.length+1}`)
    }
 
@@ -119,7 +118,7 @@ export const Playback = (props) => {
          })
 
          infoToast(`${compositionName} is saved`)
-         setIsOpen(false)
+         props.toggleSaveModal(false)
       }else{
          openPassCheck()
       }
@@ -176,7 +175,7 @@ export const Playback = (props) => {
 
    return (
       <div className={`noteListContainer ${props.side ? 'show-container': 'hide-container'}`}>
-         <Modal open={isOpen} onClose={closeModal} className='material-ui-modal'>
+         <Modal open={props.isSaveModalOpen} onClose={closeModal} className='material-ui-modal'>
             <div className='naming-container'>
                <div className='modal-title'>Composition name:</div>
                <input 
@@ -187,6 +186,7 @@ export const Playback = (props) => {
                   onClick={()=>inputRef.current.select()}
                   autoFocus={true}
                   ref={inputRef}
+                  maxLength='25'
                />
                <div className='modal-buttons-container'>
                   <div className='modal-button' onClick={saveComposition}>Save</div>
@@ -273,7 +273,7 @@ export const Playback = (props) => {
                      ? userComps.map((piece,i)=>{
                         return(
                            <div key={piece.id} className='saved-composition'>
-                              <div>
+                              <div className='composition-name'>
                                  {piece.name}
                               </div>
                               <div className='saved-icon-buttons'>
@@ -303,11 +303,12 @@ const mapStateToProps = (state) => ({
    side: state.pianoData.side,
    eventLog: state.pianoData.eventLog,
    isPlaying: state.pianoData.playing,
-   activeTabIsSaved: state.pianoData.activeTabIsSaved,
    recording: state.pianoData.recording,
+   activeTabIsSaved: state.pianoData.activeTabIsSaved,
+   isSaveModalOpen: state.pianoData.isSaveModalOpen,
    user: state.userData.user,
    isAuth: state.userData.isAuth,
 })
 
 
-export default connect(mapStateToProps, {resetLog, togglePlaying, toggleActiveTab, login})(Playback)
+export default connect(mapStateToProps, {resetLog, togglePlaying, toggleActiveTab, login, toggleSaveModal})(Playback)
