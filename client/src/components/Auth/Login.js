@@ -37,25 +37,57 @@ export const Login = (props) => {
       }
    }
 
+   const handleKeyDown = (e)=>{
+      if(e.keyCode === 13){
+         if(!email.length < 1 && !password.length < 1){
+            handleSubmit()
+         }else{
+            errorToast('All fields must be filled')
+         }
+      }
+   }
 
-   return (
-      <div className='styled-Inputs'>
-         <div className="input-field">
-            <input type="text" id="login-email" value={email} onChange={(e)=>handleChange(e)} />
-            <label htmlFor="login-email" className={`${email.length>0? 'custom-label': '' }`}>Email</label>
-         </div>
-         <div className="input-field">
-            <input type="password" id="login-password" value={password} onChange={(e)=>handleChange(e)}/>
-            <label htmlFor="login-password" className={`${password.length>0? 'custom-label': '' }`}>Password</label>
-         </div>
-         <button className={`login-button ${email.length < 1 || password.length < 1? 'disabled-button':''}`} onClick={() => loginUser(
+   const handleSubmit =()=>{
+      loginUser(
             { 
                variables: {
                   email,
                   password
                } 
             }
-      )} disabled={email.length < 1 || password.length < 1}>Login</button>
+      )
+   }
+
+
+   return (
+      <div className='styled-Inputs'>
+         <div className="input-field">
+            <input 
+               type="text" 
+               id="login-email" 
+               value={email}
+               onChange={handleChange} 
+               onKeyDown={handleKeyDown}
+            />
+            <label 
+               htmlFor="login-email" 
+               className={`${email.length>0? 'custom-label': '' }`}
+            >Email</label>
+         </div>
+         <div className="input-field">
+            <input 
+               type="password" 
+               id="login-password" 
+               value={password} 
+               onChange={handleChange} 
+               onKeyDown={handleKeyDown}
+            />
+            <label 
+               htmlFor="login-password" 
+               className={`${password.length>0? 'custom-label': '' }`}
+            >Password</label>
+         </div>
+         <button className={`login-button ${email.length < 1 || password.length < 1? 'disabled-button':''}`} onClick={handleSubmit} disabled={email.length < 1 || password.length < 1}>Login</button>
       </div>
    )
 }

@@ -207,10 +207,6 @@
 
 
 @media only screen and (max-width: 1024px) {
-   .noteListContainer{
-      left: 0;
-      border-radius: 0 15px 15px 0;
-   }
    .show-container{
       width: 10%
    }
@@ -219,4 +215,4 @@
       background-color: #eeeeee;
       z-index: 1500;
    }
- }
+}

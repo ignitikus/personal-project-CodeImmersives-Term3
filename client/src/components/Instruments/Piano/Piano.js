@@ -31,7 +31,7 @@ export const Piano = (props) => {
       props.toggleSide(true)
       props.toggleActiveTab(false)
    }
-   
+
    return (
       <>
       <div className='piano-container'>

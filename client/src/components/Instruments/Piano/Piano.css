@@ -215,7 +215,6 @@ input:checked + .slider:before {
   animation-delay: .4s;
 }
 
-
 .piano-keys{
   user-select: none;
 }

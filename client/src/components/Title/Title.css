@@ -46,6 +46,7 @@
    top: 1.5em;
    width: 3em;
    cursor: pointer;
+   z-index: 1200;
 }
 
 .clef-key:hover{
@@ -59,8 +60,16 @@
    width: 3em;
    cursor: pointer;
    fill: black;
+   z-index: 1200;
 }
 
 .exit-sign:hover{
    animation: vibrate-2 0.3s linear infinite both;
+}
+
+@media only screen and (max-width: 1024px) {
+  #title{
+    font-size: 15vw;
+    white-space: nowrap;
+  }
 }
