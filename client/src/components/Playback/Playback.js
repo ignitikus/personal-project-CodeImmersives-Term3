@@ -240,19 +240,21 @@ export const Playback = (props) => {
                         <CachedIcon />
                      </IconButton>
                   </div>
-                  <table style={{width:'100%'}}>
-                     <thead>
-                        <tr>
-                           <th>Note</th>
-                           <th>Difference</th>
-                        </tr>
-                     </thead>
+                  <table className='notes-table'>
+                     {props.eventLog.length<1
+                        ? <thead className='instruction-message'>
+                              <tr>
+                                 <td colSpan="2">Press on 'Record' <br></br> to start recording your creation</td> 
+                              </tr>
+                           </thead>
+                        : <thead className='note-diff-head'>
+                              <tr className='note-diff'>
+                                 <th>Note</th>
+                                 <th>Diff</th>
+                              </tr>
+                        </thead>
+                     }
                      <tbody>
-                        {props.eventLog.length<1 && 
-                           <tr>
-                              <td colSpan="2" className='instruction-message'>Press on 'Record' <br></br> to start recording your creation</td> 
-                           </tr>
-                        }
                         {props.eventLog.map(note=>{
                            return(
                               <tr key={note.time}>

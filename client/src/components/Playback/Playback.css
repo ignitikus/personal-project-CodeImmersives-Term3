@@ -5,6 +5,13 @@
    outline: none;
 }
 
+.notes-table{
+   width: 100%;
+}
+.notes-table>thead{
+   width: 100%;
+}
+
 .modal-title{
    text-align: center;
    font-size: 2em;
@@ -115,6 +122,7 @@
    display: flex;
    justify-content: space-evenly;
    margin: 0 10px 10px 10px;
+   transition: All 1s ease;
 }
 
 .recording-tab, .saved-tab{
@@ -196,3 +204,19 @@
 .play-icon:hover, .delete-icon:hover{
    cursor: pointer;
 }
+
+
+@media only screen and (max-width: 1024px) {
+   .noteListContainer{
+      left: 0;
+      border-radius: 0 15px 15px 0;
+   }
+   .show-container{
+      width: 10%
+   }
+   .show-container:hover{
+      width: 30%;
+      background-color: #eeeeee;
+      z-index: 1500;
+   }
+ }

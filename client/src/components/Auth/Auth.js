@@ -23,23 +23,25 @@ export const Auth = (props) => {
         onClose={props.closeModal}
         className='material-ui-modal'
       >
-         <div style={pianoDIV} className='piano-svg'>
-            <div className='inner-DIV'>
-               <div className='styled-Form-Container'>
-                  <div className='span-container'>
-                     <span 
-                        onClick={props.loginMode} 
-                        className={`login-span ${props.mode ? 'active-mode': ''}`}
-                     >Login</span>
-                     <span
-                        onClick={props.registerMode} 
-                        className={`register-span ${!props.mode ? 'active-mode': ''}`}
-                     >Register</span>
+         <div className='piano-wrapper'>
+            <div style={pianoDIV} className='piano-svg'>
+               <div className='inner-DIV'>
+                  <div className='styled-Form-Container'>
+                     <div className='span-container'>
+                        <span 
+                           onClick={props.loginMode} 
+                           className={`login-span ${props.mode ? 'active-mode': ''}`}
+                        >Login</span>
+                        <span
+                           onClick={props.registerMode} 
+                           className={`register-span ${!props.mode ? 'active-mode': ''}`}
+                        >Register</span>
+                     </div>
+                     {props.mode 
+                        ?<Login />
+                        :<Register />
+                     }
                   </div>
-                  {props.mode 
-                     ?<Login />
-                     :<Register />
-                  }
                </div>
             </div>
          </div>

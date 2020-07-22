@@ -41,12 +41,12 @@ export const Login = (props) => {
    return (
       <div className='styled-Inputs'>
          <div className="input-field">
-            <input type="text" id="login-email" value={email} onChange={(e)=>handleChange(e)}/>
-            <label htmlFor="login-email">Email</label>
+            <input type="text" id="login-email" value={email} onChange={(e)=>handleChange(e)} />
+            <label htmlFor="login-email" className={`${email.length>0? 'custom-label': '' }`}>Email</label>
          </div>
          <div className="input-field">
             <input type="password" id="login-password" value={password} onChange={(e)=>handleChange(e)}/>
-            <label htmlFor="login-password">Password</label>
+            <label htmlFor="login-password" className={`${password.length>0? 'custom-label': '' }`}>Password</label>
          </div>
          <button className={`login-button ${email.length < 1 || password.length < 1? 'disabled-button':''}`} onClick={() => loginUser(
             { 

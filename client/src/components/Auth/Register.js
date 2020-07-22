@@ -91,7 +91,7 @@ export const Register = (props) => {
       <div className='styled-Inputs'>
          <div className="input-field">
                <input type="text" id="register-username" value={username} onChange={(e)=>handleChange(e)}/>
-               <label htmlFor="register-username">Username</label>
+               <label htmlFor="register-username" className={`${username.length>0? 'custom-label': '' }`}>Username</label>
                {
                   username.length>3 
                      ?userNameDuplicate
@@ -108,7 +108,7 @@ export const Register = (props) => {
          </div>
          <div className="input-field">
                <input type="text" id="register-email" value={email} onChange={(e)=>handleChange(e)}/>
-               <label htmlFor="register-email">Email</label>
+               <label htmlFor="register-email" className={`${email.length>0? 'custom-label': '' }`}>Email</label>
                {
                   email.length>0 
                      ? emailRegex
@@ -131,7 +131,7 @@ export const Register = (props) => {
          </div>
          <div className="input-field">
             <input type="password" id="register-password" value={password} onChange={(e)=>handleChange(e)}/>
-            <label htmlFor="register-password">Password</label>
+            <label htmlFor="register-password" className={`${password.length>0? 'custom-label': '' }`}>Password</label>
             {
                password.length>0
                   ? passwordValidation
