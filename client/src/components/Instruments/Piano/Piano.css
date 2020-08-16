@@ -228,3 +228,18 @@ input:checked + .slider:before {
 .keyboard-keys{
   user-select: none;
 }
+
+@media (max-width: 600px){
+  .piano-container{
+    transform: rotate(90deg);
+    min-width: 500px;
+  }
+
+  #record-button{
+    display: none;
+  }
+
+  .desktop-only-buttons{
+    display: none;
+  }
+}

@@ -12,7 +12,6 @@ import { REGISTER } from '../../apollo/mutations'
 
 
 export const Register = (props) => {
-
    const [username, setUsername] = useState('')
    const [userNameDuplicate, setUserNameDuplicate] = useState(false)
    const [email, setEmail] = useState('')

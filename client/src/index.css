@@ -15,3 +15,44 @@ html, body{
   align-Items:center;
   height: 100%
 }
+
+.instrument-toggle{
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.labels{
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.slider{
+  background-color: red;
+}
+
+input:checked + .slider {
+  background-color:#2396F3 !important;
+}
+
+.right-indent{
+  margin-right: 350px;
+  transition: all 0.5s ease-in-out;
+}
+
+@media only screen and (max-width: 600px) {
+  .right-indent{
+    margin-right: 0;
+    transition: all 0.5s ease-in-out;
+  }
+  .instrument-toggle{
+    margin-top: 20px;
+    text-align: center;
+  }
+}

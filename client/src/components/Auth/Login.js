@@ -49,12 +49,12 @@ export const Login = (props) => {
 
    const handleSubmit =()=>{
       loginUser(
-            { 
-               variables: {
-                  email,
-                  password
-               } 
-            }
+         { 
+            variables: {
+               email,
+               password
+            } 
+         }
       )
    }
 
@@ -88,7 +88,11 @@ export const Login = (props) => {
                className={`${password.length>0? 'custom-label': '' }`}
             >Password</label>
          </div>
-         <button className={`login-button ${email.length < 1 || password.length < 1? 'disabled-button':''}`} onClick={handleSubmit} disabled={email.length < 1 || password.length < 1}>Login</button>
+         <button 
+            className={`login-button ${email.length < 1 || password.length < 1? 'disabled-button':''}`} 
+            onClick={handleSubmit} 
+            disabled={email.length < 1 || password.length < 1}>Login</button
+         >
       </div>
    )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Provider } from "react-redux";
 import store from './redux/store/store.js'
 import { ApolloProvider } from '@apollo/client'
@@ -10,8 +10,21 @@ import Title from "./components/Title/Title";
 import Playback from "./components/Playback/Playback";
 import AuthModal from './components/Auth/Auth'
 import AutoLogin from './components/AutoLogin/AutoLogin'
+import MidiPlayer from "./components/Instruments/MidiPlayer/MidiPlayer";
 
 function App() {
+
+  const [pianoMode, setPianoMode] = useState(true)
+
+  const changeMode = ()=>{
+    setPianoMode(!pianoMode)
+    localStorage.setItem('mode', !pianoMode)
+  }
+
+  useEffect(() => {
+    setPianoMode(JSON.parse(localStorage.getItem('mode')))
+  }, [])
+
   return (
     // provides Apollo client functions to all children components
     <ApolloProvider client={apolloClient}>
@@ -22,16 +35,32 @@ function App() {
             refresh token would be used to retrieve user info
             but without ability to make changes.
           */}
-          <AutoLogin />
-          <ToastifyContainer />
-          <div className='main-content-container'>
-            {/* Holds login and register modal */}
-            <AuthModal />
-            {/* Holds title, login/register icon, and logout icon */}
-            <Title />
-            <Piano />
-            {/* Holds sidebar*/}
-            <Playback />
+          {
+            window.innerWidth >= 450 &&
+            <>
+              <AutoLogin />
+              <ToastifyContainer />
+            </>
+          }
+          <div className='main-content-container '>
+            <div className= {`instrument-toggle ${pianoMode? '': 'right-indent'}`}>
+              <div className='labels'>Piano</div>
+              <label className="switch">
+                  <input type="checkbox" onChange={changeMode} checked={!pianoMode}/>
+                  <span className="slider round" style={{backgroundColor: 'red'}}></span>
+              </label>
+              <div className='labels'>Soundboard</div>
+            </div>
+            {
+              pianoMode 
+                ? <>
+                    <AuthModal />
+                    <Title />
+                    <Piano />
+                    <Playback />
+                  </>
+                : <MidiPlayer />
+            }
           </div>
         </>
       </Provider>
@@ -40,3 +69,4 @@ function App() {
 }
 
 export default App;
+

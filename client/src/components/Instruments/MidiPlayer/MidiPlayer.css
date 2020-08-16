@@ -1,0 +1,96 @@
+.MIDISounds{
+   display: none
+}
+
+.main-container{
+   margin-Right: 350px;
+   display: flex;
+   flex-Direction: column;
+   align-Items: center;
+}
+
+.rightDrawer{
+   width: 350px;
+   height: 100%;
+   position: absolute;
+   right: 0;
+   background-color: rgb(195, 194, 194);
+}
+
+.input-number{
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   align-content: center;
+}
+
+.input-number>input{
+   width: 90%;
+   margin: 10px;
+   text-align: center;
+   padding: 0;
+}
+
+.input-number>input:focus, .input-number>input:valid{
+   border-color:#eee;
+}
+
+.midi-buttons-container{
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   transition: All 0.2s ease-in-out;
+}
+
+.musical-button{
+   border-radius: 5px;
+   outline: none;
+   box-shadow: 1px 1px grey;
+   background-color: #eee;
+   transition: All 0.2s ease-in-out;
+   transform: translate(-1px, -1px);
+}
+
+.musical-button:active{
+   box-shadow: 0px 0px;
+   transform: translate(1px, 1px);
+   background-color: rgba(169, 226, 169, 0.5)
+}
+
+.toggle{
+   display: flex;
+   width: 90%;
+   justify-content: space-between;
+   margin: 5px 0;
+}
+
+.edit-toggle{
+   margin-top: 50px;
+}
+
+.save-button{
+   margin-top: 50px;
+}
+
+.single-button{
+   display: flex;
+   flex-Direction: column;
+   justify-Content: center;
+   align-Items:center;
+}
+
+@media(max-width: 600px){
+   .rightDrawer{
+      display: none;
+   }
+
+   .main-container{
+      margin-right: 0;
+   }
+
+   .midi-buttons-container{
+      width: 100%;
+   }
+}

@@ -215,3 +215,9 @@ input:valid {
       height: 60%;
    }
  }
+
+ @media (max-width: 600px){
+   .clef-key{
+     display: none;
+   }
+ }

@@ -99,6 +99,7 @@ export const Piano = (props) => {
             <button 
                onClick={()=>setShowKeyboardKeys(!showKeyboardKeys)} 
                id='show-hide-button'
+               className='desktop-only-buttons'
             >{showKeyboardKeys
                ? <div>Hide Hotkeys</div>
                : <div>Show Hotkeys</div>
@@ -106,6 +107,7 @@ export const Piano = (props) => {
             <button 
                onClick={handleSide} 
                id='show-hide-button'
+               className='desktop-only-buttons'
             >{props.side
                ? <div>Hide Side</div>
                : <div>Show Side</div>
@@ -113,6 +115,7 @@ export const Piano = (props) => {
             <button 
                onClick={handleRecording} 
                id='record-button'
+               className='desktop-only-buttons'
             >{props.recording
                ? <div id='recording'>Recording <span>.</span><span>.</span><span>.</span></div>
                : <div>Record</div>
