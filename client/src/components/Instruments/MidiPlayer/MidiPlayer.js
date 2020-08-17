@@ -30,6 +30,7 @@ export default function MidiPlayer() {
          for (let i = 0; i < playMidi.current.player.loader.instrumentKeys().length; i++) {
             items.push(<option key={i} value={i}>{'' + (i + 0) + '. ' + playMidi.current.player.loader.instrumentInfo(i).title}</option>);
          }
+         console.log('ready')
 			return items;
 		}
 	}
@@ -91,8 +92,8 @@ export default function MidiPlayer() {
 
    const restoreSettings = () => {
       const masterVolume = localStorage.getItem('volume')
-      const editToggle = localStorage.getItem('edit-toggle') === 'true'? true: false
-      const showInstrument = localStorage.getItem('show-instrument-number') === 'true'? true: false
+      const editToggle = JSON.parse(localStorage.getItem('edit-toggle'))
+      const showInstrument = JSON.parse(localStorage.getItem('show-instrument-number'))
       const buttonSize = localStorage.getItem('button-size')
       const buttonQuantity = localStorage.getItem('buttons-number')
       const instruments = JSON.parse(localStorage.getItem('buttons'))
@@ -145,7 +146,7 @@ export default function MidiPlayer() {
       playMidi.current.setMasterVolume(volume/100)
       playMidi.current.cacheInstrument(0)
       
-   }, [volume])
+   }, [])
 
    return (
       <> 
@@ -217,7 +218,8 @@ export default function MidiPlayer() {
                               <select 
                                  onChange={(e)=>selectedInstrument(e, button.key)}
                                  style={styleSelect}
-                              >{instrumentList}</select>
+                              // >{instrumentList}</select>
+                              >{createSelectItems()}</select>
                            }
                         </div>
                      )
