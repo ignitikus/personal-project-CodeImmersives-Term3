@@ -32,6 +32,7 @@ export const Playback = (props) => {
       }
    })
 
+
    const [ loginUser ] = useLazyQuery(LOGIN, {
       onCompleted: ({login}) => {
          props.login({
@@ -54,7 +55,8 @@ export const Playback = (props) => {
          setUserComps([...data.userCompositions])
       }
       if(error){
-         errorToast(error.message)
+         console.log(error)
+         if(!error.message === 'Failed to fetch') errorToast(error.message)
       }
    }, [data, error])
 
