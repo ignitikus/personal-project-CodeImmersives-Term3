@@ -22,7 +22,13 @@ function App() {
   }
 
   useEffect(() => {
-    setPianoMode(JSON.parse(localStorage.getItem('mode')))
+    const modeFromLC = localStorage.getItem('mode')
+
+    if(modeFromLC){
+      setPianoMode(JSON.parse(modeFromLC))
+    }else{
+      setPianoMode(true)
+    }
   }, [])
 
   return (

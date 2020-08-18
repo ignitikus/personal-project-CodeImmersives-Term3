@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "start ./index.js"
   },
   "dependencies": {
     "apollo-server-express": "^2.16.0",
