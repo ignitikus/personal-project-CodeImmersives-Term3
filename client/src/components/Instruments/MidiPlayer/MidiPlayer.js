@@ -140,6 +140,7 @@ export default function MidiPlayer() {
    }
    
    useEffect(() => {
+      document.title = 'Soundboard'
       restoreSettings()
       checkIfMobile()
       setInstrumentList(createSelectItems())

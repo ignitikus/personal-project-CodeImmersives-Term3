@@ -11,6 +11,7 @@ export const Piano = (props) => {
    const [showKeyboardKeys, setShowKeyboardKeys] = useState(false)
    
    useEffect(() => {
+      document.title = 'Itsy Bitsy Piano'
       document.addEventListener('keydown', handleDocumentKeyDown, false)
       return () => {
          document.removeEventListener('keydown', handleDocumentKeyDown, false)
