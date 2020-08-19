@@ -12,7 +12,9 @@ require('dotenv').config()
 const app = express()
 app.use(cookieParser())
 app.use(cors({
-  origin: 'http://nikokim.com',
+  origin: '*',
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }))
 app.disable('x-powered-by')

@@ -20,14 +20,14 @@ const cache = new InMemoryCache({
 })
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: '/graphql',
   credentials: 'include',
 });
 
 const authLink = setContext((_, { headers }) => {
   const token = Cookie.get('access-token')
   const refresh = Cookie.get('refresh-token')
-
+ 
   return {
     headers: {
       ...headers,
