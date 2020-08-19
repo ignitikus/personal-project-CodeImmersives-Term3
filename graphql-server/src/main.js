@@ -12,7 +12,13 @@ require('dotenv').config()
 const app = express()
 app.use(cookieParser())
 app.use(cors({
+<<<<<<< HEAD
   origin: 'http://localhost:3000',
+=======
+  origin: '*',
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+>>>>>>> 548549ac710de538e7fc229cf4674f1a2b7ca920
   credentials: true
 }))
 app.disable('x-powered-by')
