@@ -57,7 +57,7 @@ export default function MidiPlayer() {
    }
 
    const handleButtonSizeChange = (e) => {
-      if(e.target.value<=150){
+      if(e.target.value<=175){
          setButtonSize(e.target.value)
       }
    }
@@ -164,7 +164,7 @@ export default function MidiPlayer() {
                <input 
                   type="range" 
                   min='1' 
-                  max='30' 
+                  max='32' 
                   value={numberOfButtons} 
                   onChange={handleNumberChange}
                />
@@ -172,7 +172,7 @@ export default function MidiPlayer() {
                <input 
                   type="range" 
                   min='30' 
-                  max='100' 
+                  max='175' 
                   value={buttonSize} 
                   onChange={handleButtonSizeChange}
                />
