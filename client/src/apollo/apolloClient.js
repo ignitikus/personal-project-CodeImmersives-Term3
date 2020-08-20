@@ -20,11 +20,11 @@ const cache = new InMemoryCache({
 })
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: '/graphql/',
   credentials: 'include',
 });
 
-const authLink = setContext((_, { headers }) => {
+  const authLink = setContext((_, { headers }) => {
   const token = Cookie.get('access-token')
   const refresh = Cookie.get('refresh-token')
  
@@ -38,6 +38,6 @@ const authLink = setContext((_, { headers }) => {
 });
 
 export const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache,
+ link: authLink.concat(httpLink),
+ cache,
 })
