@@ -56,7 +56,7 @@ export const Playback = (props) => {
       }
       if(error){
          console.log(error)
-         if(!error.message === 'Failed to fetch') errorToast(error.message)
+         if(!(error.message === 'Failed to fetch')) errorToast(error.message)
       }
    }, [data, error])
 
