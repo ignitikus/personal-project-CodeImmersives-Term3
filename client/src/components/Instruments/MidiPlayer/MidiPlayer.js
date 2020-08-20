@@ -139,22 +139,18 @@ export default function MidiPlayer() {
       setKeyEditing(true)
       setShowButtonInstrument(false)
    }
-
-   const checkIfMobile = () => {
+   
+   useEffect(() => {
       if(window.innerWidth <= 700) {
          loadMobile()
       }
-   }
-   
-   useEffect(() => {
       document.title = 'Soundboard'
       restoreSettings()
-      checkIfMobile()
       setInstrumentList(createSelectItems())
       playMidi.current.setMasterVolume(volume/100)
       playMidi.current.cacheInstrument(0)
       
-   }, [])
+   }, [volume])
 
 
    return (
