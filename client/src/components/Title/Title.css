@@ -99,13 +99,6 @@
    animation: vibrate-2 0.3s linear infinite both;
 }
 
-@media only screen and (max-width: 1024px) {
-  #pianoTitle, #soundboardTitle{
-    font-size: 15vw;
-    white-space: nowrap;
-  }
-}
-
 @keyframes slideFromTheTop {
   0%{
     transform: translateY(-100%);
