@@ -1,0 +1,48 @@
+@keyframes fromBottom {
+   0%{
+      transform: translateY(100%);
+   }
+   100%{
+      transform: translateY(0);
+   }
+}
+
+
+.footer-container{
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   height: 40px;
+   width: 100%;
+   animation: fromBottom 1s 0s 1;
+   transition: all ease-in-out 1s;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.piano-footer{
+   background-color: red;
+}
+
+.soundboard-footer{
+   background-color:#2596F3;
+}
+
+.copyright{
+   margin-left: 10px;
+   color: #eee;
+   text-shadow: 1px black;
+}
+
+.contacts{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-right: 10px;
+}
+
+.icon{
+   width: 20px;
+   margin: 0 20px;
+}

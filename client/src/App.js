@@ -4,13 +4,14 @@ import store from './redux/store/store.js'
 import { ApolloProvider } from '@apollo/client'
 import { apolloClient } from './apollo/apolloClient'
 
-import ToastifyContainer from "./components/Toastify/Toastify";
+import ToastifyContainer from "./components/Toastify/Toastify"
 import Piano from './components/Instruments/Piano/Piano'
-import Title from "./components/Title/Title";
-import Playback from "./components/Playback/Playback";
+import Title from "./components/Title/Title"
+import Footer from "./components/Footer/Footer";
+import Playback from "./components/Playback/Playback"
 import AuthModal from './components/Auth/Auth'
 import AutoLogin from './components/AutoLogin/AutoLogin'
-import MidiPlayer from "./components/Instruments/MidiPlayer/MidiPlayer";
+import MidiPlayer from "./components/Instruments/MidiPlayer/MidiPlayer"
 
 function App() {
 
@@ -71,6 +72,7 @@ function App() {
                     <MidiPlayer />
                   </> 
             }
+            <Footer mode={pianoMode}/>
           </div>
         </>
       </Provider>

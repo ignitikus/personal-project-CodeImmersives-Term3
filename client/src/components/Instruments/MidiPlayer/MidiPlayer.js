@@ -34,10 +34,6 @@ export default function MidiPlayer() {
       margin: '10px'
    }
 
-   const styleSelect = {
-      width: `${buttonSize}px`
-   }
-
    const createSelectItems = ()=> {
 		if (playMidi.current) {
          let items = [];
@@ -160,7 +156,7 @@ export default function MidiPlayer() {
       
    }, [])
 
-   
+
    return (
       <> 
          <div className='rightDrawer'>
