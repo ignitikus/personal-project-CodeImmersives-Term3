@@ -132,8 +132,8 @@ export const Piano = (props) => {
                      onMouseDown={()=>handleOnMouseDown(key)}
                   >
                      <div className='letter-keys'>
-                        <span className='piano-keys'>{showKeys && key}</span>
-                        <span className='keyboard-keys'>{showKeyboardKeys && `(${props.keyboardKeys[i]})`}</span>
+                        <span className={`piano-keys ${showKeys ? 'animated-keys': null}`}>{showKeys && key}</span>
+                        <span className={`keyboard-keys ${showKeyboardKeys? 'animated-keys': null}`}>{showKeyboardKeys && `(${props.keyboardKeys[i]})`}</span>
                      </div>
                   </li>
                )

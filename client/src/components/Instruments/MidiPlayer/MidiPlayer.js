@@ -21,7 +21,7 @@ export default function MidiPlayer() {
    }
 
    const styleSelect = {
-      width: `${buttonSize}px`,
+      width: `${buttonSize}px`
    }
 
    const createSelectItems = ()=> {
@@ -42,6 +42,7 @@ export default function MidiPlayer() {
    const handleNumberChange = (e)=> {
       if(e.target.value>0){
          setNumberOfButtons(e.target.value)
+         setKeyEditing(false)
          if(buttons.length !== Number(e.target.value)){
             if(Number(e.target.value) < buttons.length){
                setButtons(buttons.slice(0, Number(e.target.value)))

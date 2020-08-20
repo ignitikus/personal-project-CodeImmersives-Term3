@@ -1,10 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@500&display=swap');
 
-#title{
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+     transform: translateX(0);
+     opacity: 1;
+  }
+}
+
+#pianoTitle{
    font-family: 'Great Vibes', cursive;
-   font-size: 7rem;
+   font-size: 3rem;
    position: absolute;
-   top: 2rem;
+   top: 5px;
+   left: 5px;
+   animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+#soundboardTitle{
+   font-family: 'Orbitron', sans-serif;
+   font-size: 3rem;
+   position: absolute;
+   top: 5px;
+   left: 5px;
+   animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 
 @keyframes vibrate-2 {
@@ -40,6 +61,16 @@
    }
  }
 
+
+ @keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .clef-key{
    position: absolute;
    right: 1.5em;
@@ -47,6 +78,7 @@
    width: 3em;
    cursor: pointer;
    z-index: 1200;
+   animation: 1s ease-out 0s 1 slideInFromRight;
 }
 
 .clef-key:hover{
@@ -68,13 +100,27 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  #title{
+  #pianoTitle, #soundboardTitle{
     font-size: 15vw;
     white-space: nowrap;
   }
 }
+
+@keyframes slideFromTheTop {
+  0%{
+    transform: translateY(-100%);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+
 @media only screen and (max-width: 600px) {
-  #title{
-    display: none;
+  #pianoTitle, #soundboardTitle{
+    display: absolute;
+    top: 10px;
+    left: auto;
+    font-size: 2.5rem;
+    animation: 1s ease-out 0s 1 slideFromTheTop;
   }
 }

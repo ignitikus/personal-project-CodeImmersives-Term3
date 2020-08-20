@@ -12,17 +12,18 @@ export function Title(props) {
 
    return (
       <> 
-         {
-            props.user 
-            ?<Exit className='exit-sign' onClick={()=>{
-               props.logoutUser()
-               props.resetLog()
-               props.toggleActiveTab(false)
-            }}/>
-            :<Clef className='clef-key' onClick={props.openModal}/>
+         { props.title === "Itsy Bitsy Piano" 
+            ?props.user 
+               ?<Exit className='exit-sign' onClick={()=>{
+                  props.logoutUser()
+                  props.resetLog()
+                  props.toggleActiveTab(false)
+               }}/>
+               :<Clef className='clef-key' onClick={props.openModal}/>
+            : null
          }
-         <div id='title'>
-            Itsy Bitsy Piano
+         <div id={props.title === "Itsy Bitsy Piano" ? 'pianoTitle': 'soundboardTitle'}>
+            {props.title}
          </div>
       </>
    )

@@ -61,11 +61,15 @@ function App() {
               pianoMode 
                 ? <>
                     <AuthModal />
-                    <Title />
+                    <Title title={'Itsy Bitsy Piano'} />
                     <Piano />
                     <Playback />
                   </>
-                : <MidiPlayer />
+
+                : <> 
+                    <Title title={'Soundboard'} />
+                    <MidiPlayer />
+                  </> 
             }
           </div>
         </>
