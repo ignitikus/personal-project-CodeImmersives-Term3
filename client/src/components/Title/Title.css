@@ -93,6 +93,7 @@
    cursor: pointer;
    fill: black;
    z-index: 1200;
+   animation: 1s ease-out 0s 1 slideInFromRight;
 }
 
 .exit-sign:hover{
