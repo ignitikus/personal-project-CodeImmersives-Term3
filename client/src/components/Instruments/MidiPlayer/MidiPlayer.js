@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import MIDISounds from 'midi-sounds-react'
+import Select from 'react-select'
 
 import './MidiPlayer.css'
 
@@ -13,6 +14,19 @@ export default function MidiPlayer() {
    const [volume, setVolume] = useState(50)
    const [keyEditing, setKeyEditing] = useState(false)
    const [showButtonInstrument, setShowButtonInstrument] = useState(false)
+
+   const customSelect = {
+      container: () => ({
+         width: `${buttonSize}px`,
+         position: 'relative',
+         boxSizing: 'border-box'
+      }),
+      
+      menu: (provided, state) => ({
+         ...provided,
+         width: '300px',
+      }),
+   }
 
    const styledButton = {
       width: `${buttonSize}px`,
@@ -28,9 +42,8 @@ export default function MidiPlayer() {
 		if (playMidi.current) {
          let items = [];
          for (let i = 0; i < playMidi.current.player.loader.instrumentKeys().length; i++) {
-            items.push(<option key={i} value={i}>{'' + (i + 0) + '. ' + playMidi.current.player.loader.instrumentInfo(i).title}</option>);
+            items.push({ value: i , label: '' + (i + 0) + '. ' + playMidi.current.player.loader.instrumentInfo(i).title });
          }
-         console.log('ready')
 			return items;
 		}
 	}
@@ -42,7 +55,6 @@ export default function MidiPlayer() {
    const handleNumberChange = (e)=> {
       if(e.target.value>0){
          setNumberOfButtons(e.target.value)
-         setKeyEditing(false)
          if(buttons.length !== Number(e.target.value)){
             if(Number(e.target.value) < buttons.length){
                setButtons(buttons.slice(0, Number(e.target.value)))
@@ -64,9 +76,9 @@ export default function MidiPlayer() {
    }
 
    const selectedInstrument = (e, button) => {
-      playMidi.current.cacheInstrument(e.target.options[e.target.selectedIndex].getAttribute("value"))
+      playMidi.current.cacheInstrument(e.value)
       const buttonsCopy = [...buttons]
-      buttonsCopy[button].instrument = e.target.options[e.target.selectedIndex].getAttribute("value")
+      buttonsCopy[button].instrument = e.value
       setButtons(buttonsCopy)
    }
 
@@ -149,7 +161,6 @@ export default function MidiPlayer() {
       playMidi.current.cacheInstrument(0)
       
    }, [])
-
    return (
       <> 
          <div className='rightDrawer'>
@@ -217,11 +228,12 @@ export default function MidiPlayer() {
                               {showButtonInstrument && button.instrument}
                            </button>
                            {keyEditing && 
-                              <select 
+                              <Select 
+                                 options={instrumentList}
+                                 styles={customSelect}
+                                 className='select-container'
                                  onChange={(e)=>selectedInstrument(e, button.key)}
-                                 style={styleSelect}
-                              // >{instrumentList}</select>
-                              >{createSelectItems()}</select>
+                              />
                            }
                         </div>
                      )
