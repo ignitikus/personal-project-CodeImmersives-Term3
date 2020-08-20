@@ -140,14 +140,12 @@ export default function MidiPlayer() {
       ])
       setButtonSize(90)
       setKeyEditing(false)
-      setTimeout(() => {
-         setKeyEditing(true)
-      }, 3000);
+      setKeyEditing(true)
       setShowButtonInstrument(false)
    }
 
    const checkIfMobile = () => {
-      if(window.innerWidth <= 450) {
+      if(window.innerWidth <= 700) {
          loadMobile()
       }
    }
@@ -161,6 +159,8 @@ export default function MidiPlayer() {
       playMidi.current.cacheInstrument(0)
       
    }, [])
+
+   
    return (
       <> 
          <div className='rightDrawer'>
