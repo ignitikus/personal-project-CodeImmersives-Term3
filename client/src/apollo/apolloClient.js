@@ -20,7 +20,7 @@ const cache = new InMemoryCache({
 })
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
   credentials: 'include',
 });
 
