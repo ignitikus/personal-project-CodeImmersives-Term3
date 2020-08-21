@@ -116,11 +116,88 @@
 .burger-menu{
    position: absolute;
    height: initial;
-   right: 1.5em;
-   top: 1.5em;
+   right: 1em;
+   top: 1em;
    width: 3em;
    cursor: pointer;
    animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+@keyframes showModal{
+   0%{
+      opacity: 0;
+   }
+   100%{
+      opacity: 1;
+   }
+}
+
+.burger-modal{
+   display: none;
+   background-color: rgba(0, 0, 0, 0.8);
+   z-index: 1500;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   animation: showModal 0.5s;
+}
+
+.burger-modal-menu{
+   background-color: #eee;
+   z-index: 1555;
+   width: 70%;
+   height: 80%;
+   border-radius: 10px;
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+}
+
+.burger-input{
+   width: 90%;
+}
+
+.burger-labelForRangeSliders{
+   margin-top: 20px;
+}
+
+.close-button-cross{
+   width: 40px;
+   position: fixed;
+   top: 13%;
+   right: 20%;
+   cursor: pointer;
+}
+
+.change-instrument-button{
+   display: none;
+}
+
+.instruments-modal{
+   display: none;
+   background-color: rgba(0, 0, 0, 0.8);
+   z-index: 1500;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   animation: showModal 0.5s;
+}
+
+.instruments-modal-select{
+   background-color: #eee;
+   z-index: 1555;
+   width: 70%;
+   height: 80%;
+   border-radius: 10px;
 }
 
 @keyframes slideFromTheBottom{
@@ -146,5 +223,13 @@
 
    .midi-buttons-container{
       width: 100%;
+   }
+
+   .select-container{
+      display: none;
+   }
+
+   .change-instrument-button{
+      display: initial;
    }
 }

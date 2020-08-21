@@ -2,6 +2,9 @@ import React, { useRef, useState, useEffect } from 'react'
 import MIDISounds from 'midi-sounds-react'
 import Select from 'react-select'
 
+import { ReactComponent as Burger } from '../../../assets/burger.svg'
+import Close from '../../../assets/close-x.png'
+
 import './MidiPlayer.css'
 
 export default function MidiPlayer() {
@@ -14,17 +17,37 @@ export default function MidiPlayer() {
    const [volume, setVolume] = useState(50)
    const [keyEditing, setKeyEditing] = useState(false)
    const [showButtonInstrument, setShowButtonInstrument] = useState(false)
+   const [burgerMenu, setBurgerMenu] = useState(false)
+   const [showInstrumentList, setShowInstrumentList] = useState(false)
+   const [currentInstrument, setCurrentInstrument] = useState(0)
 
    const customSelect = {
       container: () => ({
          width: `${buttonSize}px`,
          position: 'relative',
-         boxSizing: 'border-box'
+         boxSizing: 'border-box',
       }),
       
       menu: (provided, state) => ({
          ...provided,
          width: '300px',
+      }),
+   }
+   const customSelect2 = {
+      container: (provided) => ({
+         width: '100%',
+         position: 'relative',
+         boxSizing: 'border-box',
+         paddingTop: '10px',
+      }),
+      
+      menu: (provided, state) => ({
+         ...provided,
+      }),
+
+      menuList: (provided, state) => ({
+         ...provided,
+         maxHeight: '550px'
       }),
    }
 
@@ -65,6 +88,7 @@ export default function MidiPlayer() {
       }
    }
 
+
    const handleButtonSizeChange = (e) => {
       if(e.target.value<=175){
          setButtonSize(e.target.value)
@@ -76,6 +100,16 @@ export default function MidiPlayer() {
       const buttonsCopy = [...buttons]
       buttonsCopy[button].instrument = e.value
       setButtons(buttonsCopy)
+   }
+   
+   const changeInstrumentButton =(button)=>{
+      setShowInstrumentList(true)
+      setCurrentInstrument(button)
+   }
+
+   const handleInstrumentChange = (e)=>{
+      setShowInstrumentList(false)
+      selectedInstrument(e, currentInstrument.key)
    }
 
    const handleVolumeChange = (e) => {
@@ -97,6 +131,7 @@ export default function MidiPlayer() {
       localStorage.setItem('show-instrument-number', showButtonInstrument)
       localStorage.setItem('buttons-number', numberOfButtons)
       localStorage.setItem('buttons', JSON.stringify(buttons))
+      setBurgerMenu(false)
    }
 
    const restoreSettings = () => {
@@ -120,41 +155,84 @@ export default function MidiPlayer() {
       }
 
    }
-
-   const loadMobile = () =>{
-      setNumberOfButtons(6)
-      setButtons([
-         {key: 0, instrument: 0},
-         {key: 1, instrument: 0},
-         {key: 2, instrument: 0},
-         {key: 3, instrument: 0},
-         {key: 4, instrument: 0},
-         {key: 5, instrument: 0},
-         {key: 6, instrument: 0},
-         {key: 7, instrument: 0},
-         {key: 8, instrument: 0},
-      ])
-      setButtonSize(90)
-      setKeyEditing(false)
-      setKeyEditing(true)
-      setShowButtonInstrument(false)
-   }
    
    useEffect(() => {
-      if(window.innerWidth <= 700) {
-         loadMobile()
-      }
       document.title = 'Soundboard'
       restoreSettings()
       setInstrumentList(createSelectItems())
       playMidi.current.setMasterVolume(volume/100)
       playMidi.current.cacheInstrument(0)
-      
-   }, [volume])
-
+   }, [])
 
    return (
       <> 
+         <Burger className='burger-menu' onClick={()=>setBurgerMenu(!burgerMenu)}/>
+         {
+            showInstrumentList &&
+            <div className='instruments-modal'>
+               <div className='instruments-modal-select'>
+                  <Select 
+                     options={instrumentList}
+                     styles={customSelect2}
+                     menuIsOpen={true}
+                     onChange={handleInstrumentChange}
+                  />
+               </div>
+            </div>
+         }
+         {
+            burgerMenu && 
+               <div className='burger-modal'>
+                  <div className='burger-modal-menu'>
+                     <div className='input-number burger-input'>
+                        <img src={Close} alt="close-button" className='close-button-cross' onClick={()=>setBurgerMenu(false)}/>
+                        <div className='burger-labelForRangeSliders'>Master Volume: {volume}</div>
+                        <input 
+                           type="range" 
+                           min='1' 
+                           max='100' 
+                           value={volume} 
+                           onChange={handleVolumeChange}
+                        />
+                        <div className='burger-labelForRangeSliders'>Number of buttons: {buttons.length}</div>
+                        <input 
+                           type="range" 
+                           min='1' 
+                           max='9' 
+                           value={numberOfButtons} 
+                           onChange={handleNumberChange}
+                        />
+                        <div className='burger-labelForRangeSliders'>Button size in pixels: {buttonSize}x{buttonSize}</div>
+                        <input 
+                           type="range" 
+                           min='30' 
+                           max='110' 
+                           value={buttonSize} 
+                           onChange={handleButtonSizeChange}
+                        />
+                        <div className='toggle edit-toggle'>
+                           <div>Edit Keys:</div>
+                           <label className="switch">
+                              <input type="checkbox" onChange={handleToggleChange} checked={keyEditing}/>
+                              <span className="slider round"></span>
+                           </label>
+                        </div>
+                        <div className='toggle'>
+                           <div>Instrument:</div>
+                           <label className="switch">
+                              <input type="checkbox" onChange={handleShowButtonInstrument} checked={showButtonInstrument}/>
+                              <span className="slider round"></span>
+                           </label>
+                        </div>
+                        <div className='save-button'>
+                           <button onClick={handleSave}>
+                              Save Settings
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+         }
          <div className='rightDrawer'>
             <div className='input-number'>
                <div className='labelForRangeSliders'>Master Volume: {volume}</div>
@@ -220,12 +298,15 @@ export default function MidiPlayer() {
                               {showButtonInstrument && button.instrument}
                            </button>
                            {keyEditing && 
-                              <Select 
-                                 options={instrumentList}
-                                 styles={customSelect}
-                                 className='select-container'
-                                 onChange={(e)=>selectedInstrument(e, button.key)}
-                              />
+                              <>
+                                 <Select 
+                                    options={instrumentList}
+                                    styles={customSelect}
+                                    className='select-container'
+                                    onChange={(e)=>selectedInstrument(e, button.key)}
+                                 />
+                                 <button className='change-instrument-button' onClick={()=>changeInstrumentButton(button)}>change</button>
+                              </>
                            }
                         </div>
                      )
